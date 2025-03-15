@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            // Informasi Dasar
             $table->string('nip')->unique();
             $table->string('nama');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('alamat');
-            $table->string('no_telepon');
-            $table->string('email')->unique();
+            $table->string('nama_depan');
+            $table->string('nama_belakang')->nullable();
             $table->string('jabatan');
             $table->string('departemen');
-            $table->date('tanggal_bergabung');
+            
+            // Kontak Utama
+            $table->string('no_telepon');
+            $table->string('email')->unique();
+            
+            // Foto
             $table->string('foto')->nullable();
+            
             $table->timestamps();
         });
     }

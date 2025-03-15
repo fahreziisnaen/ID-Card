@@ -62,8 +62,12 @@
                                             <a href="{{ route('employees.edit', $employee) }}" class="text-green-600 hover:text-green-900 mr-2">Edit</a>
                                             <button 
                                                 type="button"
-                                                data-name="{{ $employee->nama }}"
-                                                data-url="{{ route('employees.show', $employee) }}"
+                                                data-nama="{{ $employee->nama }}"
+                                                data-nama-depan="{{ $employee->nama_depan }}"
+                                                data-nama-blk="{{ $employee->nama_belakang }}"
+                                                data-jabatan="{{ $employee->jabatan }}"
+                                                data-no-telepon="{{ $employee->no_telepon }}"
+                                                data-email="{{ $employee->email }}"
                                                 class="show-qr text-purple-600 hover:text-purple-900 mr-2 cursor-pointer">
                                                 Show QR
                                             </button>
@@ -128,9 +132,27 @@
                     e.preventDefault();
                     console.log('Button clicked');
                     
-                    const nama = this.dataset.name;
+                    // Ambil data karyawan dari data attributes
+                    const nama = this.dataset.nama;
                     const url = this.dataset.url;
-                    console.log('Data:', { nama, url });
+                    const phone = this.dataset.phone;
+                    const email = this.dataset.email;
+                    const jabatan = this.dataset.jabatan;
+                    const departemen = this.dataset.departemen;
+                    const namaBlk = this.dataset.namaBlk;
+                    const namaDepan = this.dataset.namaDepan;
+                    const telKantor = this.dataset.telKantor;
+                    const noTelepon = this.dataset.noTelepon;
+                    const emailKantor = this.dataset.emailKantor;
+                    const whatsapp = this.dataset.whatsapp;
+                    const linkedin = this.dataset.linkedin;
+                    const website = this.dataset.website;
+                    const alamat = this.dataset.alamat;
+                    const kota = this.dataset.kota;
+                    const provinsi = this.dataset.provinsi;
+                    const kodePos = this.dataset.kodePos;
+                    const negara = this.dataset.negara;
+                    const catatan = this.dataset.catatan;
                     
                     try {
                         const modal = document.getElementById('qrModal');
@@ -143,21 +165,28 @@
                         // Set modal title
                         modalTitle.textContent = `QR Code - ${nama}`;
                         
-                        // Generate new QR code
-                        console.log('Generating QR code...');
-                        new QRCode(qrcodeDiv, {
-                            text: url,
-                            width: 128,
-                            height: 128,
-                            colorDark : "#000000",
-                            colorLight : "#ffffff",
-                            correctLevel : QRCode.CorrectLevel.H
-                        });
-                        console.log('QR code generated');
+                        // Buat vCard string
+                        const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:${namaBlk};${namaDepan};;;
+FN:${nama}
+ORG:PT. Internet Pratama Indonesia
+TITLE:${jabatan}
+TEL:${noTelepon}
+EMAIL:${email}
+END:VCARD`;
                         
-                        // Show modal using Tailwind classes
+                        // Generate QR code dengan ukuran yang lebih besar
+                        new QRCode(qrcodeDiv, {
+                            text: vcard,
+                            width: 256,  // Perbesar ukuran
+                            height: 256, // Perbesar ukuran
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.M // Ubah ke M untuk mengurangi density
+                        });
+                        
                         modal.classList.remove('hidden');
-                        console.log('Modal should be visible now');
                     } catch (error) {
                         console.error('Error:', error);
                         alert('Error generating QR code: ' + error.message);

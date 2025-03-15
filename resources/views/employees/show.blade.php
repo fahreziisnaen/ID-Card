@@ -27,26 +27,28 @@
                             </div>
 
                             <div>
-                                <h3 class="text-gray-600 text-sm">Nama</h3>
+                                <h3 class="text-gray-600 text-sm">Nama Lengkap</h3>
                                 <p class="text-gray-900">{{ $employee->nama }}</p>
                             </div>
 
                             <div>
-                                <h3 class="text-gray-600 text-sm">Tempat, Tanggal Lahir</h3>
-                                <p class="text-gray-900">
-                                    {{ $employee->tempat_lahir }}, 
-                                    {{ $employee->tanggal_lahir ? $employee->tanggal_lahir->format('d F Y') : '-' }}
-                                </p>
+                                <h3 class="text-gray-600 text-sm">Nama Depan</h3>
+                                <p class="text-gray-900">{{ $employee->nama_depan }}</p>
                             </div>
 
                             <div>
-                                <h3 class="text-gray-600 text-sm">Jenis Kelamin</h3>
-                                <p class="text-gray-900">{{ $employee->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</p>
+                                <h3 class="text-gray-600 text-sm">Nama Belakang</h3>
+                                <p class="text-gray-900">{{ $employee->nama_belakang ?: '-' }}</p>
                             </div>
 
                             <div>
-                                <h3 class="text-gray-600 text-sm">Alamat</h3>
-                                <p class="text-gray-900">{{ $employee->alamat }}</p>
+                                <h3 class="text-gray-600 text-sm">Jabatan</h3>
+                                <p class="text-gray-900">{{ $employee->jabatan }}</p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-gray-600 text-sm">Departemen</h3>
+                                <p class="text-gray-900">{{ $employee->departemen }}</p>
                             </div>
                         </div>
 
@@ -59,23 +61,6 @@
                             <div>
                                 <h3 class="text-gray-600 text-sm">Email</h3>
                                 <p class="text-gray-900">{{ $employee->email }}</p>
-                            </div>
-
-                            <div>
-                                <h3 class="text-gray-600 text-sm">Jabatan</h3>
-                                <p class="text-gray-900">{{ $employee->jabatan }}</p>
-                            </div>
-
-                            <div>
-                                <h3 class="text-gray-600 text-sm">Departemen</h3>
-                                <p class="text-gray-900">{{ $employee->departemen }}</p>
-                            </div>
-
-                            <div>
-                                <h3 class="text-gray-600 text-sm">Tanggal Bergabung</h3>
-                                <p class="text-gray-900">
-                                    {{ $employee->tanggal_bergabung ? $employee->tanggal_bergabung->format('d F Y') : '-' }}
-                                </p>
                             </div>
                         </div>
                     </div>
