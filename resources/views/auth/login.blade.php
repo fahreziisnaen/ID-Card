@@ -2,6 +2,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <!-- Welcome Message -->
+    <div class="text-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Selamat Datang Team!</h1>
+        <p class="text-gray-600 mt-1">Silahkan Login untuk mengakses sistem</p>
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 

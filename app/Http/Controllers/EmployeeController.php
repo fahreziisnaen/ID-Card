@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ActivityLog;
 
 class EmployeeController extends Controller
 {
@@ -55,6 +56,14 @@ class EmployeeController extends Controller
             }
 
             Employee::create($data);
+
+            // Log aktivitas
+            ActivityLog::create([
+                'user_id' => auth()->id(),
+                'activity_type' => 'create',
+                'description' => 'Membuat data karyawan baru: ' . $data['nama']
+            ]);
+
             return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil ditambahkan');
         } catch (\Exception $e) {
             // Tambahkan log untuk debugging
@@ -110,6 +119,14 @@ class EmployeeController extends Controller
             }
 
             $employee->update($data);
+
+            // Log aktivitas
+            ActivityLog::create([
+                'user_id' => auth()->id(),
+                'activity_type' => 'update',
+                'description' => 'Mengubah data karyawan: ' . $employee->nama
+            ]);
+
             return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil diperbarui');
         } catch (\Exception $e) {
             return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()]);
@@ -121,6 +138,12 @@ class EmployeeController extends Controller
         if ($employee->foto) {
             Storage::disk('public')->delete('employee-photos/' . $employee->foto);
         }
+        
+        ActivityLog::create([
+            'user_id' => auth()->id(),
+            'activity_type' => 'delete',
+            'description' => 'Menghapus data karyawan: ' . $employee->nama
+        ]);
         
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Data karyawan berhasil dihapus');

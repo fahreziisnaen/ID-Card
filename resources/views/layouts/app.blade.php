@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +22,8 @@
             });
         </script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased min-h-full flex flex-col">
+        <div class="flex-grow bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -36,10 +36,22 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Footer -->
+        <footer class="bg-white shadow py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <span class="text-sm text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2">
+                    © {{ date('Y') }} PT. Internet Pratama Indonesia. All rights reserved. Developed by 
+                    <a href="https://fahrezifauzan.vercel.app/" target="_blank" class="text-blue-500 hover:underline flex items-center gap-1">    
+                        <img src="{{ asset('images/frz_sign.png') }}" alt="FRZ Logo" class="h-4 w-auto"> 
+                    </a>
+                </span>
+            </div>
+        </footer>
 
         @stack('scripts')
     </body>

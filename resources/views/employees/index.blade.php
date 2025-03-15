@@ -134,25 +134,11 @@
                     
                     // Ambil data karyawan dari data attributes
                     const nama = this.dataset.nama;
-                    const url = this.dataset.url;
-                    const phone = this.dataset.phone;
-                    const email = this.dataset.email;
-                    const jabatan = this.dataset.jabatan;
-                    const departemen = this.dataset.departemen;
                     const namaBlk = this.dataset.namaBlk;
                     const namaDepan = this.dataset.namaDepan;
-                    const telKantor = this.dataset.telKantor;
+                    const jabatan = this.dataset.jabatan;
                     const noTelepon = this.dataset.noTelepon;
-                    const emailKantor = this.dataset.emailKantor;
-                    const whatsapp = this.dataset.whatsapp;
-                    const linkedin = this.dataset.linkedin;
-                    const website = this.dataset.website;
-                    const alamat = this.dataset.alamat;
-                    const kota = this.dataset.kota;
-                    const provinsi = this.dataset.provinsi;
-                    const kodePos = this.dataset.kodePos;
-                    const negara = this.dataset.negara;
-                    const catatan = this.dataset.catatan;
+                    const email = this.dataset.email;
                     
                     try {
                         const modal = document.getElementById('qrModal');
@@ -179,11 +165,11 @@ END:VCARD`;
                         // Generate QR code dengan ukuran yang lebih besar
                         new QRCode(qrcodeDiv, {
                             text: vcard,
-                            width: 256,  // Perbesar ukuran
-                            height: 256, // Perbesar ukuran
+                            width: 256,
+                            height: 256,
                             colorDark: "#000000",
                             colorLight: "#ffffff",
-                            correctLevel: QRCode.CorrectLevel.M // Ubah ke M untuk mengurangi density
+                            correctLevel: QRCode.CorrectLevel.M
                         });
                         
                         modal.classList.remove('hidden');
@@ -199,7 +185,6 @@ END:VCARD`;
                 const modal = document.getElementById('qrModal');
                 if (event.target == modal) {
                     modal.classList.add('hidden');
-                    console.log('Modal closed');
                 }
             }
         });
